@@ -1,5 +1,6 @@
 body{
-  //background: $primary url('/images/background.jpg') no-repeat center/cover;
-  //min-height: 100vh;
-  background: $primary;
+  //background: $primary url(../../public/images/background.jpg) no-repeat center/cover;
+  background: $primary url(../images/background.jpg) no-repeat center/cover;
+  min-height: 100vh;
+  //background: $primary;
 }

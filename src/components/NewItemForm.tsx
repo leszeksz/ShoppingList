@@ -8,6 +8,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Alert from '@material-ui/lab/Alert'
 
 export const NewItemForm = () => {
 
@@ -25,7 +26,7 @@ export const NewItemForm = () => {
 
         if (isNaN(Number(quantity))){
             tmpErrors.push('Quantity must be a number');
-        }else if (Number(quantity) < 0){
+        }else if (Number(quantity) <= 0){
             tmpErrors.push('Quantity must be a positive number');
         }
 
@@ -52,6 +53,9 @@ export const NewItemForm = () => {
     const classes = styles();
 
     let errorJsx = null;
+    if(errors.length > 0){
+        errorJsx = errors.map((err:String,index:number) => <Alert key={index} severity={"error"} >{err}</Alert>)
+    }
 
     return (
         <Paper square elevation={3}>

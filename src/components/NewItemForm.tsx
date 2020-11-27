@@ -9,8 +9,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Alert from '@material-ui/lab/Alert'
+import {Product} from "../models/Product";
 
-export const NewItemForm = () => {
+export const NewItemForm = ({addProductFn}: {addProductFn: Function}) => {
 
     const [item, setItem] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -24,13 +25,20 @@ export const NewItemForm = () => {
             tmpErrors.push('Item name must be at least 3 characters long');
         }
 
-        if (isNaN(Number(quantity))){
+        const qty = Number(quantity);
+        if (isNaN(qty)){
             tmpErrors.push('Quantity must be a number');
-        }else if (Number(quantity) <= 0){
+        }else if (qty <= 0){
             tmpErrors.push('Quantity must be a positive number');
         }
 
         setErrors(tmpErrors);
+        if (tmpErrors.length === 0){
+            const newProduct = new Product(item, qty,unit);
+            addProductFn(newProduct);
+            setItem('');
+            setQuantity('');
+        }
     }
 
 
